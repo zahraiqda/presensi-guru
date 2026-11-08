@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --biru: #1f3a6e;
+  --biru-tua: #162a52;
+  --biru-muda: #e8edf7;
+  --emas: #c9951b;
+  --emas-muda: #fbf1d8;
+  --emas-terang: #f0d48a;
+  --hijau: #2f7d4f;
+  --merah: #b3392f;
+  --krem: #f7f3ea;
+  --garis: #e2d9c6;
+  --teks: #2b2a27;
+  --redup: #6d675b;
+}
+
+body {
+  background-color: var(--krem);
+  color: var(--teks);
+}

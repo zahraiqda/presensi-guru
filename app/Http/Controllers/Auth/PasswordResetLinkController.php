@@ -42,10 +42,25 @@ class PasswordResetLinkController extends Controller
             $user->update(['email' => $resetEmail]);
         }
 
-        $status = Password::sendResetLink(['email' => $resetEmail]);
+        try {
+            $status = Password::sendResetLink(['email' => $resetEmail]);
 
-        return $status === Password::RESET_LINK_SENT
-            ? back()->with('status', 'Link reset password telah dikirim ke email: ' . $resetEmail)
-            : back()->withErrors(['username' => __($status)]);
+            return $status === Password::RESET_LINK_SENT
+                ? back()->with('status', 'Link reset password telah dikirim ke email: ' . $resetEmail)
+                : back()->withErrors(['username' => __($status)]);
+        } catch (\Throwable $e) {
+            report($e);
+
+            // Jika koneksi SMTP gagal (misal port 465/587 diblokir oleh provider internet/ISP):
+            // Buat token reset password secara langsung agar Admin tetap bisa melanjutkan reset password
+            $token = Password::broker()->createToken($user);
+            $resetUrl = route('password.reset', ['token' => $token, 'email' => $resetEmail]);
+
+            return back()->with('status_fallback', [
+                'email' => $resetEmail,
+                'url' => $resetUrl,
+                'error' => $e->getMessage(),
+            ]);
+        }
     }
 }

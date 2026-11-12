@@ -114,21 +114,67 @@
                     </div>
                 </div>
 
-                @if ($user->role === 'admin' && isset($adminResetEmail))
+                @if ($user->role === 'admin')
                 <!-- Email Reset Section (Admin only) -->
                 <div class="px-6 pb-6">
-                    <div class="rounded-xl bg-emas-muda border border-emas/30 p-4">
-                        <div class="flex items-start gap-3">
-                            <div class="w-9 h-9 rounded-xl bg-white flex items-center justify-center shrink-0 mt-0.5 border border-emas/40">
-                                <svg class="w-4.5 h-4.5 text-biru-tua" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="rounded-2xl bg-gradient-to-br from-emas-muda/60 to-biru-muda/40 border border-emas/30 p-5 shadow-xs">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-9 h-9 rounded-xl bg-biru text-emas-terang flex items-center justify-center shrink-0 shadow-xs">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <div class="min-w-0">
-                                <p class="text-xs font-bold uppercase tracking-wider text-biru-tua mb-1">Email Reset Password</p>
-                                <p class="text-sm font-semibold text-teks break-all">{{ $adminResetEmail }}</p>
+                            <div>
+                                <h4 class="text-sm font-bold text-biru-tua">Email Admin (Reset Password)</h4>
+                                <p class="text-xs text-redup">Email untuk menerima link pemulihan saat lupa password.</p>
                             </div>
                         </div>
+
+                        @if (session('status_email'))
+                            <div class="flex items-center gap-2 p-3 mb-3 rounded-xl bg-hijau-muda border border-hijau/20 text-hijau text-xs font-semibold animate-[fadeIn_0.3s_ease-out]">
+                                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                <span>{{ session('status_email') }}</span>
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('profile.email') }}" class="space-y-3">
+                            @csrf
+                            @method('PUT')
+
+                            <div>
+                                <label for="admin_email" class="block text-xs font-semibold text-teks mb-1">Alamat Email Admin</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="w-4 h-4 text-redup" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+                                        </svg>
+                                    </div>
+                                    <input id="admin_email"
+                                           name="email"
+                                           type="email"
+                                           value="{{ old('email', $user->email ?: ($adminResetEmail ?? '')) }}"
+                                           class="block w-full pl-9 pr-3 py-2 rounded-xl border border-garis bg-white text-sm text-teks placeholder-redup/70 focus:border-biru focus:ring-2 focus:ring-biru/20 transition-all outline-none @error('email') border-red-500 @enderror"
+                                           placeholder="contoh: admin@sekolah.sch.id"
+                                           required>
+                                </div>
+                                @error('email')
+                                    <p class="text-xs text-red-500 mt-1 font-medium">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="flex items-center justify-between pt-1">
+                                <span class="text-[11px] text-redup">Perubahan email langsung tersimpan ke sistem.</span>
+                                <button type="submit"
+                                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-biru hover:bg-biru-tua text-emas-terang text-xs font-bold shadow-xs hover:shadow-md transition-all active:scale-[0.98]">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span>Simpan Email</span>
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 @endif

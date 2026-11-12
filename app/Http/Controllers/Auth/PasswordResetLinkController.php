@@ -30,15 +30,17 @@ class PasswordResetLinkController extends Controller
             return back()->with('status', 'Reset password untuk akun ini dilakukan oleh Admin. Silakan hubungi Administrator sekolah.');
         }
 
-        // Ambil email tujuan reset dari .env
-        $resetEmail = env('ADMIN_RESET_EMAIL');
+        // Ambil email tujuan reset: utamakan dari email akun di database, fallback ke .env
+        $resetEmail = $user->email ?: env('ADMIN_RESET_EMAIL');
 
         if (! $resetEmail) {
-            return back()->withErrors(['username' => 'Email reset password belum dikonfigurasi. Hubungi pengembang sistem untuk mengisi ADMIN_RESET_EMAIL di file .env.']);
+            return back()->withErrors(['username' => 'Email reset password belum diatur pada akun admin. Silakan login dan atur email di menu Profil.']);
         }
 
-        // Update email user admin agar sesuai dengan ADMIN_RESET_EMAIL di .env
-        $user->update(['email' => $resetEmail]);
+        // Pastikan kolom email user sinkron
+        if ($user->email !== $resetEmail) {
+            $user->update(['email' => $resetEmail]);
+        }
 
         $status = Password::sendResetLink(['email' => $resetEmail]);
 

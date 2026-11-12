@@ -35,6 +35,7 @@ Route::middleware('auth')->get('/dashboard', function () {
 // Profil - semua role (Bab 13 PRD)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/email', [ProfileController::class, 'updateEmail'])->name('profile.email');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
 });
 

@@ -48,8 +48,8 @@ class IzinApprovalController extends Controller
         ]);
 
         $pesan = $statusApproval === 'disetujui'
-            ? 'Izin guru berhasil DISETUJUI.'
-            : 'Izin guru telah DITOLAK.';
+            ? 'Izin guru & staf berhasil DISETUJUI.'
+            : 'Izin guru & staf telah DITOLAK.';
 
         return back()->with('status_proses', $pesan);
     }

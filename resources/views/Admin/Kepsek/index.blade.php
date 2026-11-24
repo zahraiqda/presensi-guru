@@ -122,7 +122,7 @@
                                 <input type="text" name="no_wa_kepsek" value="{{ old('no_wa_kepsek', $pengaturan->no_wa_kepsek) }}"
                                     placeholder="Contoh: 08123456789 atau 628123456789"
                                     class="w-full px-3.5 py-2 rounded-xl border border-garis text-sm font-mono focus:border-biru focus:ring-2 focus:ring-biru/20 outline-none bg-white text-teks">
-                                <p class="text-[11px] text-redup">Nomor tujuan chat WhatsApp saat guru mengajukan izin.</p>
+                                <p class="text-[11px] text-redup">Nomor tujuan chat WhatsApp saat guru & staf mengajukan izin.</p>
                                 @error('no_wa_kepsek')
                                     <p class="text-merah text-xs mt-1">{{ $message }}</p>
                                 @enderror

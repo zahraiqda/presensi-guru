@@ -40,9 +40,9 @@ class Presensi extends Model
     public function getPesanWhatsAppAttribute(): string
     {
         $guru = $this->guru;
-        $nama = $guru?->nama ?? 'Guru';
+        $nama = $guru?->nama ?? 'Guru & Staf';
         $nip = $guru?->nip ? ' (NIP: ' . $guru->nip . ')' : '';
-        $mapel = $guru?->mata_pelajaran ? ' - Guru ' . $guru->mata_pelajaran : '';
+        $mapel = $guru?->label_mapel ? ' - ' . $guru->label_mapel : '';
         $tanggal = $this->tanggal ? $this->tanggal->isoFormat('dddd, D MMMM Y') : date('d/m/Y');
         $alasan = $this->keterangan ?? '-';
         $link = $this->approval_url;

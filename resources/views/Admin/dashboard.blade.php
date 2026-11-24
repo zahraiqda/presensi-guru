@@ -141,7 +141,7 @@
                     </div>
                     <div class="mt-3 flex items-baseline gap-2">
                         <span class="text-3xl sm:text-4xl font-extrabold text-biru">{{ $izinHariIni }}</span>
-                        <span class="text-xs font-medium text-redup">Guru</span>
+                        <span class="text-xs font-medium text-redup">Guru & Staf</span>
                     </div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-[#efe8d8] text-xs text-redup">
@@ -162,7 +162,7 @@
                     </div>
                     <div class="mt-3 flex items-baseline gap-2">
                         <span class="text-3xl sm:text-4xl font-extrabold text-emas-tua">{{ $sakitHariIni }}</span>
-                        <span class="text-xs font-medium text-redup">Guru</span>
+                        <span class="text-xs font-medium text-redup">Guru & Staf</span>
                     </div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-[#efe8d8] text-xs text-redup">
@@ -183,7 +183,7 @@
                     </div>
                     <div class="mt-3 flex items-baseline gap-2">
                         <span class="text-3xl sm:text-4xl font-extrabold text-merah">{{ $belumPresensiCount }}</span>
-                        <span class="text-xs font-medium text-redup">Guru</span>
+                        <span class="text-xs font-medium text-redup">Guru & Staf</span>
                     </div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-[#efe8d8] text-xs text-merah font-semibold">

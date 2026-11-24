@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Persetujuan Izin Guru - SMK Islam Al-Amanah Salem</title>
+    <title>Persetujuan Izin Guru & Staf - SMK Islam Al-Amanah Salem</title>
 
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
             </div>
             <div>
                 <p class="text-[11px] font-bold text-emas-tua uppercase tracking-widest">SMK Islam Al-Amanah Salem</p>
-                <h1 class="text-xl sm:text-2xl font-extrabold text-biru-tua leading-tight">Konfirmasi Izin Guru</h1>
+                <h1 class="text-xl sm:text-2xl font-extrabold text-biru-tua leading-tight">Konfirmasi Izin Guru & Staf</h1>
                 <p class="text-xs text-redup">Persetujuan Kehadiran oleh Kepala Sekolah</p>
             </div>
         </div>
@@ -50,10 +50,10 @@
                     </div>
                     <div>
                         <h2 class="font-bold text-base sm:text-lg text-white leading-tight">
-                            {{ $presensi->guru->nama ?? 'Guru' }}
+                            {{ $presensi->guru->nama ?? 'Guru & Staf' }}
                         </h2>
                         <p class="text-xs text-emas-terang">
-                            {{ $presensi->guru->mata_pelajaran ? 'Guru ' . $presensi->guru->mata_pelajaran : 'Tenaga Pendidik' }}
+                            {{ $presensi->guru->label_mapel ?? 'Tenaga Pendidik / Staf' }}
                             @if ($presensi->guru?->nip)
                                 • <span class="font-mono text-[11px] text-slate-200">NIP: {{ $presensi->guru->nip }}</span>
                             @endif
@@ -121,7 +121,7 @@
                         @endif
                     @else
                         <div class="p-3 rounded-2xl bg-krem border border-garis text-redup text-xs italic">
-                            Guru tidak melampirkan file surat/dokumen fisik.
+                            Guru / staf tidak melampirkan file surat/dokumen fisik.
                         </div>
                     @endif
                 </div>

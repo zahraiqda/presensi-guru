@@ -34,7 +34,7 @@
                         <img src="{{ asset('images/logo.png') }}" alt="Logo SMK" class="w-full h-full rounded-full object-cover">
                     </div>
                     <div>
-                        <p class="text-[#cdd5ea] text-xs font-medium">Selamat datang, dewan guru</p>
+                        <p class="text-[#cdd5ea] text-xs font-medium">Selamat datang, dewan guru & staf</p>
                         <p class="text-xl font-extrabold text-white leading-tight">{{ Auth::user()->nama }}</p>
                         <p class="text-emas-terang text-xs font-semibold mt-0.5 flex items-center gap-1.5 flex-wrap">
                             @if ($guru?->mata_pelajaran)

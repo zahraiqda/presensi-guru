@@ -22,7 +22,7 @@
                         Rekap & Analisis Laporan Presensi
                     </h1>
                     <p class="text-xs sm:text-sm text-slate-200 max-w-xl">
-                        Analisis kedisiplinan guru, ringkasan rekapitulasi kehadiran, log presensi real-time, dan pengaturan titik koordinat geofencing.
+                        Analisis kedisiplinan guru & staf, ringkasan rekapitulasi kehadiran, log presensi real-time, dan pengaturan titik koordinat geofencing.
                     </p>
                 </div>
 
@@ -565,8 +565,8 @@
                         📊
                     </div>
                     <div>
-                        <h3 class="font-bold text-biru-tua text-base leading-tight">Rekapitulasi Kehadiran Guru</h3>
-                        <p class="text-xs text-redup mt-0.5">Total presensi masuk, sakit, dan izin per guru dalam periode ini.</p>
+                        <h3 class="font-bold text-biru-tua text-base leading-tight">Rekapitulasi Kehadiran Guru & Staf</h3>
+                        <p class="text-xs text-redup mt-0.5">Total presensi masuk, sakit, dan izin per guru & staf dalam periode ini.</p>
                     </div>
                 </div>
 
@@ -583,7 +583,7 @@
                 <table class="min-w-full text-sm text-left">
                     <thead class="bg-biru-muda border-b border-garis text-biru-tua text-xs font-bold uppercase tracking-wider">
                         <tr>
-                            <th class="px-6 py-4">Nama Guru</th>
+                            <th class="px-6 py-4">Nama Guru & Staf</th>
                             <th class="px-6 py-4 text-center">Hadir (Masuk)</th>
                             <th class="px-6 py-4 text-center">Sakit</th>
                             <th class="px-6 py-4 text-center">Izin</th>
@@ -637,7 +637,7 @@
                     </div>
                     <div>
                         <h3 class="font-bold text-biru-tua text-base leading-tight">Log Riwayat Harian Presensi</h3>
-                        <p class="text-xs text-redup mt-0.5">Catatan riwayat harian dewan guru dengan jam masuk, jam pulang, dan koordinat GPS.</p>
+                        <p class="text-xs text-redup mt-0.5">Catatan riwayat harian dewan guru & staf dengan jam masuk, jam pulang, dan koordinat GPS.</p>
                     </div>
                 </div>
             </div>
@@ -647,7 +647,7 @@
                     <thead class="bg-biru-muda border-b border-garis text-biru-tua text-xs font-bold uppercase tracking-wider sticky top-0 z-10">
                         <tr>
                             <th class="px-6 py-3.5">Tanggal</th>
-                            <th class="px-6 py-3.5">Nama Guru</th>
+                            <th class="px-6 py-3.5">Nama Guru & Staf</th>
                             <th class="px-6 py-3.5 text-center">Jam Masuk</th>
                             <th class="px-6 py-3.5 text-center">Jam Pulang</th>
                             <th class="px-6 py-3.5 text-center">Status</th>

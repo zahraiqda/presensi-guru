@@ -14,12 +14,9 @@ class User extends Authenticatable
 
     protected $hidden = ['password', 'remember_token'];
 
-    protected function casts(): array
-    {
-        return [
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'password' => 'hashed',
+    ];
 
     public function guru()
     {
@@ -39,5 +36,18 @@ class User extends Authenticatable
     public function isKepalaSekolah(): bool
     {
         return $this->role === 'kepala_sekolah';
+    }
+
+    public function getRoleLabelAttribute(): string
+    {
+        if ($this->role === 'admin') {
+            return 'Administrator';
+        }
+
+        if ($this->role === 'kepala_sekolah') {
+            return 'Kepala Sekolah';
+        }
+
+        return $this->guru?->label_mapel ?: 'Guru & Staf';
     }
 }

@@ -212,7 +212,7 @@
         <!-- Tautan Navigasi Bawah -->
         <div class="text-center pt-2 space-y-2">
             <p class="text-[11px] text-redup">
-                Sistem Presensi Guru • SMK Islam Al-Amanah Salem, Brebes
+                Sistem Presensi Guru & Staf • SMK Islam Al-Amanah Salem, Brebes
             </p>
             <div>
                 <a href="{{ route('login') }}" class="text-xs font-semibold text-biru hover:text-biru-tua underline">

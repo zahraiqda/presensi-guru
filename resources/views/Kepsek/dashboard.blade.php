@@ -57,7 +57,7 @@
                         Selamat Datang, {{ Auth::user()->nama }} 👋
                     </h1>
                     <p class="text-sm sm:text-base text-[#cdd5ea] max-w-2xl leading-relaxed">
-                        Pantau kehadiran dewan guru SMK Islam Al-Amanah Salem secara langsung hari ini.
+                        Pantau kehadiran dewan guru & staf SMK Islam Al-Amanah Salem secara langsung hari ini.
                     </p>
                 </div>
 
@@ -83,15 +83,15 @@
             <div class="bg-white rounded-xl p-5 border border-garis shadow-xs hover:shadow-md transition-all border-t-4 border-t-biru flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-redup uppercase tracking-wider">Total Dewan Guru</span>
+                        <span class="text-xs font-bold text-redup uppercase tracking-wider">Total Guru & Staf</span>
                         <div class="w-10 h-10 rounded-lg bg-biru-muda text-biru flex items-center justify-center text-lg">👥</div>
                     </div>
                     <div class="mt-3 flex items-baseline gap-2">
                         <span class="text-3xl sm:text-4xl font-extrabold text-biru-tua">{{ $totalGuru }}</span>
-                        <span class="text-xs font-medium text-redup">Guru / Staf</span>
+                        <span class="text-xs font-medium text-redup">Guru & Staf</span>
                     </div>
                 </div>
-                <div class="mt-4 pt-3 border-t border-[#efe8d8] text-xs text-redup">Jumlah guru terdaftar</div>
+                <div class="mt-4 pt-3 border-t border-[#efe8d8] text-xs text-redup">Jumlah guru & staf terdaftar</div>
             </div>
 
             <!-- Card 2: Hadir Hari Ini (Hijau) -->
@@ -118,7 +118,7 @@
                     </div>
                     <div class="mt-3 flex items-baseline gap-2">
                         <span class="text-3xl sm:text-4xl font-extrabold text-biru">{{ $izinHariIni }}</span>
-                        <span class="text-xs font-medium text-redup">Guru</span>
+                        <span class="text-xs font-medium text-redup">Guru & Staf</span>
                     </div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-[#efe8d8] text-xs text-redup">Mengajukan izin hari ini</div>
@@ -133,7 +133,7 @@
                     </div>
                     <div class="mt-3 flex items-baseline gap-2">
                         <span class="text-3xl sm:text-4xl font-extrabold text-emas-tua">{{ $sakitHariIni }}</span>
-                        <span class="text-xs font-medium text-redup">Guru</span>
+                        <span class="text-xs font-medium text-redup">Guru & Staf</span>
                     </div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-[#efe8d8] text-xs text-redup">Keterangan sakit hari ini</div>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="mt-3 flex items-baseline gap-2">
                         <span class="text-3xl sm:text-4xl font-extrabold text-merah">{{ $belumPresensiCount }}</span>
-                        <span class="text-xs font-medium text-redup">Guru</span>
+                        <span class="text-xs font-medium text-redup">Guru & Staf</span>
                     </div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-[#efe8d8] text-xs text-merah font-semibold">Belum mencatat kehadiran</div>
@@ -161,7 +161,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                 <div>
                     <h3 class="text-sm font-bold text-biru-tua">Tingkat Kehadiran Harian</h3>
-                    <p class="text-xs text-redup">Proporsi kehadiran dewan guru berdasarkan status hari ini</p>
+                    <p class="text-xs text-redup">Proporsi kehadiran dewan guru & staf berdasarkan status hari ini</p>
                 </div>
                 <div class="flex flex-wrap items-center gap-2 text-xs">
                     <span class="px-2.5 py-1 rounded-full bg-hijau-muda text-hijau font-semibold">Hadir: <strong>{{ $hadirHariIni }}</strong> ({{ $persenHadir }}%)</span>
@@ -198,17 +198,17 @@
                 <div class="p-5 border-b border-garis space-y-4">
                     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                         <div>
-                            <h3 class="text-base font-bold text-biru-tua">Ringkasan Kehadiran Guru Hari Ini</h3>
-                            <p class="text-xs text-redup">Daftar presensi seluruh dewan guru hari ini</p>
+                            <h3 class="text-base font-bold text-biru-tua">Ringkasan Kehadiran Guru & Staf Hari Ini</h3>
+                            <p class="text-xs text-redup">Daftar presensi seluruh dewan guru & staf hari ini</p>
                         </div>
                         <div class="text-xs text-redup font-medium bg-krem border border-garis px-3 py-1 rounded-md">
-                            Menampilkan <span class="font-bold text-biru" x-text="filteredTeachers.length"></span> dari <span class="font-bold text-teks">{{ count($ringkasanGuru) }}</span> guru
+                            Menampilkan <span class="font-bold text-biru" x-text="filteredTeachers.length"></span> dari <span class="font-bold text-teks">{{ count($ringkasanGuru) }}</span> guru & staf
                         </div>
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-3">
                         <div class="relative flex-1">
-                            <input type="text" x-model="search" placeholder="Cari berdasarkan nama, NIK, atau guru mapel..."
+                            <input type="text" x-model="search" placeholder="Cari berdasarkan nama, NIK, atau jabatan/mapel..."
                                    class="w-full px-4 py-2.5 rounded-lg border border-garis text-xs sm:text-sm focus:border-biru focus:ring-2 focus:ring-biru/20 outline-none placeholder:text-redup bg-[#fdfcf9]">
                         </div>
 
@@ -236,7 +236,7 @@
                     <table class="min-w-full text-left text-sm divide-y divide-garis">
                         <thead class="bg-biru-muda text-biru-tua font-bold text-xs uppercase tracking-wider">
                             <tr>
-                                <th class="px-5 py-3.5">Nama Guru</th>
+                                <th class="px-5 py-3.5">Nama Guru & Staf</th>
                                 <th class="px-5 py-3.5">NIK</th>
                                 <th class="px-5 py-3.5">Jam Masuk</th>
                                 <th class="px-5 py-3.5">Jam Pulang</th>
@@ -253,7 +253,7 @@
                                             </div>
                                             <div>
                                                 <span class="block font-semibold text-teks text-sm leading-tight" x-text="g.nama"></span>
-                                                <span class="block text-[11px] text-redup mt-0.5" x-text="g.label_mapel || (g.mata_pelajaran ? 'Guru ' + g.mata_pelajaran : 'Tenaga Pengajar')"></span>
+                                                <span class="block text-[11px] text-redup mt-0.5" x-text="g.label_mapel || (g.mata_pelajaran ? 'Guru ' + g.mata_pelajaran : 'Guru / Staf')"></span>
                                             </div>
                                         </div>
                                     </td>

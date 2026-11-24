@@ -277,7 +277,7 @@
     <div class="kop-divider"></div>
 
     <div class="doc-title">
-        <h2>Rekapitulasi Presensi Guru</h2>
+        <h2>Rekapitulasi Presensi Guru & Staf</h2>
     </div>
 
     <div class="meta-box">
@@ -293,12 +293,12 @@
         </table>
     </div>
 
-    <h3>HASIL REKAPITULASI PRESENSI GURU</h3>
+    <h3>HASIL REKAPITULASI PRESENSI GURU & STAF</h3>
     <table class="table-data">
         <thead>
             <tr>
                 <th style="width: 8%;" class="text-center">No</th>
-                <th style="width: 47%;">Nama Guru</th>
+                <th style="width: 47%;">Nama Guru & Staf</th>
                 <th style="width: 15%;" class="text-center">Hadir (Masuk)</th>
                 <th style="width: 15%;" class="text-center">Sakit</th>
                 <th style="width: 15%;" class="text-center">Izin</th>
@@ -316,7 +316,7 @@
             @empty
                 <tr>
                     <td colspan="5" class="text-center" style="color: #94a3b8; padding: 18px;">
-                        Tidak ada data guru pada periode ini.
+                        Tidak ada data guru & staf pada periode ini.
                     </td>
                 </tr>
             @endforelse

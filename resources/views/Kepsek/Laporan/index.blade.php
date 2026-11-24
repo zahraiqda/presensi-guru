@@ -22,7 +22,7 @@
                         Rekap & Analisis Laporan Presensi
                     </h1>
                     <p class="text-xs sm:text-sm text-slate-200 max-w-xl">
-                        Tinjauan kedisiplinan guru dan rekapitulasi kehadiran pengajar untuk bahan evaluasi pimpinan.
+                        Tinjauan kedisiplinan guru & staf dan rekapitulasi kehadiran untuk bahan evaluasi pimpinan.
                     </p>
                 </div>
 
@@ -46,7 +46,7 @@
                 </div>
                 <div>
                     <h3 class="leading-tight text-biru-tua">Filter Periode Tanggal Laporan</h3>
-                    <p class="text-xs text-redup font-normal">Pilih jangka waktu untuk menganalisis performa dan rekap kehadiran guru.</p>
+                    <p class="text-xs text-redup font-normal">Pilih jangka waktu untuk menganalisis performa dan rekap kehadiran guru & staf.</p>
                 </div>
             </div>
 
@@ -78,7 +78,7 @@
         <!-- Section Title Analisis Kinerja Guru -->
         <div class="flex items-center gap-2.5 pt-2">
             <div class="w-2.5 h-6 rounded-full bg-biru"></div>
-            <h3 class="font-extrabold text-biru-tua text-lg">Hasil Analisis Kedisiplinan & Kinerja Guru</h3>
+            <h3 class="font-extrabold text-biru-tua text-lg">Hasil Analisis Kedisiplinan & Kinerja Guru & Staf</h3>
             <span class="text-xs text-redup font-normal ml-auto">Periode Terpilih</span>
         </div>
 
@@ -179,7 +179,7 @@
                                 </span>
                             </div>
                         @empty
-                            <p class="text-xs text-redup py-3 text-center">Semua guru checkout tertib.</p>
+                            <p class="text-xs text-redup py-3 text-center">Semua guru & staf checkout tertib.</p>
                         @endforelse
                     </div>
                 </div>
@@ -245,8 +245,8 @@
                         📊
                     </div>
                     <div>
-                        <h3 class="font-bold text-biru-tua text-base leading-tight">Hasil Rekapitulasi Kehadiran Guru</h3>
-                        <p class="text-xs text-redup mt-0.5">Total presensi masuk, sakit, dan izin per guru dalam periode ini.</p>
+                        <h3 class="font-bold text-biru-tua text-base leading-tight">Hasil Rekapitulasi Kehadiran Guru & Staf</h3>
+                        <p class="text-xs text-redup mt-0.5">Total presensi masuk, sakit, dan izin per guru & staf dalam periode ini.</p>
                     </div>
                 </div>
 
@@ -263,7 +263,7 @@
                 <table class="min-w-full text-sm text-left">
                     <thead class="bg-biru-muda border-b border-garis text-biru-tua text-xs font-bold uppercase tracking-wider">
                         <tr>
-                            <th class="px-6 py-4">Nama Guru</th>
+                            <th class="px-6 py-4">Nama Guru & Staf</th>
                             <th class="px-6 py-4 text-center">Hadir (Masuk)</th>
                             <th class="px-6 py-4 text-center">Sakit</th>
                             <th class="px-6 py-4 text-center">Izin</th>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Presensi Guru') }} - SMK Islam Al-Amanah Salem</title>
+    <title>{{ config('app.name', 'Presensi Guru & Staf') }} - SMK Islam Al-Amanah Salem</title>
 
     <style>[x-cloak]{display:none !important;}</style>
 
@@ -34,7 +34,7 @@
         $menu = match ($role) {
             'admin' => [
                 ['label' => 'Dashboard', 'route' => 'admin.dashboard', 'active' => 'admin.dashboard', 'icon' => $iconDashboard],
-                ['label' => 'Data Guru', 'route' => 'admin.guru.index', 'active' => 'admin.guru.*', 'icon' => $iconGuru],
+                ['label' => 'Data Guru & Staf', 'route' => 'admin.guru.index', 'active' => 'admin.guru.*', 'icon' => $iconGuru],
                 ['label' => 'Rekap Laporan', 'route' => 'admin.laporan.index', 'active' => 'admin.laporan.*', 'icon' => $iconLaporan],
                 ['label' => 'Arsip Presensi', 'route' => 'admin.arsip.index', 'active' => 'admin.arsip.*', 'icon' => $iconArsip],
                 ['label' => 'Kepala Sekolah', 'route' => 'admin.kepsek.index', 'active' => 'admin.kepsek.*', 'icon' => $iconKepsek],
@@ -64,7 +64,7 @@
                         </div>
                         <div class="hidden sm:block">
                             <span class="block font-bold text-white text-sm sm:text-base tracking-tight leading-tight whitespace-nowrap">
-                                Presensi Guru
+                                Presensi Guru & Staf
                             </span>
                             <span class="block text-[11px] font-medium text-[#cdd5ea] leading-tight whitespace-nowrap">
                                 SMK Islam Al-Amanah Salem
@@ -98,8 +98,8 @@
                             <span class="block text-xs font-semibold text-white leading-tight truncate">
                                 {{ Auth::user()->nama }}
                             </span>
-                            <span class="inline-block text-[10px] font-bold text-emas-terang leading-tight">
-                                {{ ucfirst(str_replace('_', ' ', Auth::user()->role)) }}
+                            <span class="inline-block text-[10px] font-bold text-emas-terang leading-tight truncate">
+                                {{ Auth::user()->role_label }}
                             </span>
                         </div>
                     </a>
@@ -143,11 +143,14 @@
                 @endforeach
 
                 <div class="border-t border-white/15 my-2 pt-2">
-                    <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white hover:bg-white/10">
-                        <span class="w-6 h-6 rounded-full bg-emas text-biru-tua text-xs font-bold flex items-center justify-center">
+                    <a href="{{ route('profile.edit') }}" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-white hover:bg-white/10">
+                        <span class="w-7 h-7 rounded-lg bg-emas text-biru-tua text-xs font-bold flex items-center justify-center shrink-0 shadow-xs">
                             {{ strtoupper(substr(Auth::user()->nama, 0, 1)) }}
                         </span>
-                        <span>Profil: <strong>{{ Auth::user()->nama }}</strong></span>
+                        <div class="flex flex-col text-left">
+                            <span class="font-bold text-white text-xs leading-tight">{{ Auth::user()->nama }}</span>
+                            <span class="text-[10px] text-emas-terang font-semibold">{{ Auth::user()->role_label }}</span>
+                        </div>
                     </a>
                     <form method="POST" action="{{ route('logout') }}" class="mt-1">
                         @csrf

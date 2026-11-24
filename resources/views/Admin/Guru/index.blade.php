@@ -19,30 +19,54 @@
                         <span>SMK ISLAM AL AMANAH SALEM</span>
                     </div>
                     <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
-                        Data Guru & Tenaga Pendidik
+                        Data Guru & Staf
                     </h1>
                     <p class="text-xs sm:text-sm text-slate-200 max-w-xl">
-                        Kelola data guru, akun akses presensi mobile/web, dan import massal data pengajar sekolah.
+                        Kelola data guru dan staf kependidikan, akun akses presensi mobile/web, dan import massal data.
                     </p>
                 </div>
 
                 <div class="flex items-center gap-3">
                     <div class="px-5 py-3 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15 text-center shadow-inner">
-                        <p class="text-[11px] text-slate-200 font-medium uppercase tracking-wider">Total Guru</p>
+                        <p class="text-[11px] text-slate-200 font-medium uppercase tracking-wider">Total Guru & Staf</p>
                         <p class="text-xl sm:text-2xl font-black text-emas-terang">{{ $guru->total() }}</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Session Status Alert -->
+        <!-- Alert Notifikasi: Sukses / Error / Peringatan -->
         @if (session('status'))
-            <div class="flex items-center gap-3 p-4 rounded-2xl bg-biru-muda border border-biru/20 text-biru-tua text-sm shadow-xs">
-                <div class="w-8 h-8 rounded-xl bg-biru text-emas-terang flex items-center justify-center shrink-0 text-sm font-bold shadow-xs">
+            <div class="flex items-center gap-3 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm shadow-xs animate-in fade-in duration-200">
+                <div class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 text-sm font-bold shadow-xs">
                     ✓
                 </div>
                 <div class="flex-1 font-medium">
                     {{ session('status') }}
+                </div>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="flex items-start gap-3 p-4 rounded-2xl bg-red-50 border border-red-200 text-red-900 text-sm shadow-xs animate-in fade-in duration-200">
+                <div class="w-8 h-8 rounded-xl bg-red-600 text-white flex items-center justify-center shrink-0 text-sm font-bold shadow-xs mt-0.5">
+                    ✕
+                </div>
+                <div class="flex-1">
+                    <p class="font-bold text-red-800">Perhatian:</p>
+                    <p class="text-red-700 mt-0.5 leading-relaxed">{{ session('error') }}</p>
+                </div>
+            </div>
+        @endif
+
+        @if (session('warning'))
+            <div class="flex items-start gap-3 p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-sm shadow-xs animate-in fade-in duration-200">
+                <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 text-sm font-bold shadow-xs mt-0.5">
+                    !
+                </div>
+                <div class="flex-1">
+                    <p class="font-bold text-amber-900">Pemberitahuan:</p>
+                    <p class="text-amber-800 mt-0.5 leading-relaxed">{{ session('warning') }}</p>
                 </div>
             </div>
         @endif
@@ -57,7 +81,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                     </div>
-                    <input type="text" name="q" value="{{ $keyword }}" placeholder="Cari NIK, Nama, atau Guru Mapel..."
+                    <input type="text" name="q" value="{{ $keyword }}" placeholder="Cari NIK, Nama, atau Jabatan/Mapel..."
                         class="w-full pl-10 pr-10 py-2.5 rounded-xl border border-garis text-sm text-teks focus:border-biru focus:ring-2 focus:ring-biru/20 outline-none transition-all placeholder-redup/70 bg-white">
                     @if ($keyword)
                         <a href="{{ route('admin.guru.index') }}" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-redup hover:text-teks text-xs font-semibold">
@@ -81,7 +105,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                         </svg>
-                        <span>Tambah Guru</span>
+                        <span>Tambah Guru & Staf</span>
                     </a>
                 </div>
             </div>
@@ -90,7 +114,7 @@
             <div class="flex items-start gap-3 p-3.5 rounded-xl bg-emas-muda border border-emas/30 text-teks text-xs">
                 <span class="text-base leading-none">💡</span>
                 <div class="leading-relaxed">
-                    <strong class="text-biru-tua font-bold">Petunjuk Import CSV:</strong> Gunakan file <code class="px-1.5 py-0.5 rounded bg-white border border-emas/40 font-mono text-biru-tua font-bold">.csv</code> dengan urutan kolom: pertama <strong>NIK</strong>, kedua <strong>Nama</strong>, ketiga <strong>Mata Pelajaran</strong> (opsional, contoh: <em>PPKn</em>). Baris pertama header akan dilewati otomatis. Username & kata sandi akun guru baru akan otomatis dibuat dari NIK.
+                    <strong class="text-biru-tua font-bold">Petunjuk Import CSV:</strong> Gunakan file <code class="px-1.5 py-0.5 rounded bg-white border border-emas/40 font-mono text-biru-tua font-bold">.csv</code> dengan urutan kolom: pertama <strong>NIK (wajib 16 digit angka)</strong>, kedua <strong>Nama Lengkap</strong>, ketiga <strong>Jabatan / Mata Pelajaran</strong> (opsional, contoh: <em>Waka Kesiswaan</em> atau <em>PPKn</em>). Baris pertama header akan dilewati otomatis. Akun login akan otomatis dibuat dengan username & password dari NIK.
                 </div>
             </div>
         </div>
@@ -101,7 +125,7 @@
                 <table class="min-w-full text-sm text-left">
                     <thead class="bg-biru-muda border-b border-garis text-biru-tua text-xs font-bold uppercase tracking-wider">
                         <tr>
-                            <th class="px-6 py-4">Guru</th>
+                            <th class="px-6 py-4">Guru & Staf</th>
                             <th class="px-6 py-4">NIK</th>
                             <th class="px-6 py-4">Akun Login</th>
                             <th class="px-6 py-4 text-right">Aksi</th>
@@ -126,7 +150,7 @@
                                                         {{ $g->label_mapel }}
                                                     </span>
                                                 @else
-                                                    <span class="text-xs text-redup">Tenaga Pengajar</span>
+                                                    <span class="text-xs text-redup">Guru / Staf</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -212,7 +236,7 @@
                         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-full h-full object-contain">
                     </div>
                     <div>
-                        <h3 class="font-bold text-base text-white">Import Data Guru</h3>
+                        <h3 class="font-bold text-base text-white">Import Data Guru & Staf</h3>
                         <p class="text-xs text-emas-terang">SMK Islam Al Amanah Salem</p>
                     </div>
                 </div>
@@ -236,7 +260,7 @@
                         <input type="file" name="file_csv" accept=".csv" required
                             class="block w-full text-xs text-redup file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-biru file:text-emas-terang hover:file:bg-biru-tua cursor-pointer">
                         <p class="text-[11px] text-redup mt-2">
-                            Maksimal ukuran file: 2 MB
+                            Format wajib <strong>.csv</strong> • Maksimal ukuran: 2 MB
                         </p>
                     </div>
                     @error('file_csv')
@@ -244,11 +268,19 @@
                     @enderror
                 </div>
 
-                <div class="p-3 bg-biru-muda rounded-xl text-[11px] text-redup space-y-1 border border-garis">
-                    <p>• Kolom 1: <strong>NIK</strong> (wajib diisi, unik)</p>
-                    <p>• Kolom 2: <strong>Nama Lengkap Guru</strong> (wajib diisi)</p>
-                    <p>• Kolom 3: <strong>Mata Pelajaran</strong> (opsional, contoh: PPKn, Matematika)</p>
-                    <p>• Akun user dibuat otomatis dengan password default NIK</p>
+                <div class="p-3.5 bg-biru-muda rounded-xl text-[11px] text-redup space-y-1.5 border border-garis">
+                    <p class="font-semibold text-biru-tua flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5 text-biru shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                        Petunjuk Susunan Kolom:
+                    </p>
+                    <p>• <strong>Kolom 1: NIK</strong> (wajib diisi, 16 digit, jadi username & password awal)</p>
+                    <p>• <strong>Kolom 2: Nama Lengkap</strong> (wajib diisi beserta gelar)</p>
+                    <p>• <strong>Kolom 3: Jabatan / Mata Pelajaran</strong> (contoh: Guru Mapel Matematika, Staf TU, Operator)</p>
+                    <p class="text-[10px] text-redup/80 pt-1 border-t border-garis/60">
+                        *Jika file Anda di WPS/Excel (.xlsx), silakan simpan ulang (Save As) dengan tipe <strong>CSV (Comma Delimited) (*.csv)</strong>.
+                    </p>
                 </div>
 
                 <div class="flex items-center justify-end gap-2 pt-2">

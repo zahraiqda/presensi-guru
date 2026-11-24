@@ -15,15 +15,18 @@ class Guru extends Model
 
     public function getLabelMapelAttribute(): string
     {
-        if (empty($this->mata_pelajaran)) {
-            return 'Tenaga Pengajar';
+        $val = trim((string) $this->mata_pelajaran);
+
+        if (empty($val)) {
+            return 'Tenaga Pendidik / Staf';
         }
 
-        if (preg_match('/^guru\b/i', trim($this->mata_pelajaran))) {
-            return trim($this->mata_pelajaran);
+        // Jika sudah berupa nama jabatan struktural, staf, atau berawalan Guru
+        if (preg_match('/^(guru|waka|staf|staff|kepala|kaprog|bendahara|operator|laboran|toolman|teknisi|pustakawan|penjaga|satpam|koordinator|pembina)\b/i', $val)) {
+            return $val;
         }
 
-        return 'Guru ' . trim($this->mata_pelajaran);
+        return 'Guru ' . $val;
     }
 
     public function user()

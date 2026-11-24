@@ -15,10 +15,10 @@
                         <span>SMK ISLAM AL AMANAH</span>
                     </div>
                     <h1 class="text-2xl font-extrabold tracking-tight text-white leading-tight">
-                        Edit Data Guru
+                        Edit Data Guru & Staf
                     </h1>
                     <p class="text-xs sm:text-sm text-slate-200">
-                        Perbarui informasi pengajar atau ganti password akun login guru <span class="text-emas-terang font-semibold">{{ $guru->nama }}</span>.
+                        Perbarui informasi atau ganti password akun login guru & staf <span class="text-emas-terang font-semibold">{{ $guru->nama }}</span>.
                     </p>
                 </div>
 
@@ -77,7 +77,7 @@
                     <div class="space-y-1.5">
                         <div class="space-y-1">
                             <label for="nama" class="block text-xs font-bold text-teks uppercase tracking-wider">
-                                Nama Lengkap Guru <span class="text-merah">*</span>
+                                Nama Lengkap Guru & Staf <span class="text-merah">*</span>
                             </label>
                             <div class="text-[11px] text-redup py-0.5">
                                 Sertakan gelar pendidikan bila ada (contoh: S.Pd.)
@@ -90,50 +90,96 @@
                     </div>
                 </div>
 
-                <!-- Mata Pelajaran / Bidang Studi -->
-                <div class="space-y-2 p-4 sm:p-5 rounded-2xl bg-biru-muda/30 border border-biru/15">
+                <!-- Jabatan / Tugas / Mata Pelajaran -->
+                @php
+                    $jabatanList = [
+                        'Tugas Tambahan / Waka & Struktural' => [
+                            'Waka Kurikulum',
+                            'Waka Kesiswaan',
+                            'Waka Hubin (Hubungan Industri)',
+                            'Waka Sarpras (Sarana & Prasarana)',
+                            'Kepala Program (Kaprog) TKJ',
+                            'Kepala Program (Kaprog) RPL',
+                            'Guru Bimbingan Konseling (BK)',
+                            'Pembina OSIS',
+                        ],
+                        'Tenaga Kependidikan / Staf Sekolah' => [
+                            'Staf Tata Usaha (TU)',
+                            'Bendahara Sekolah',
+                            'Operator Sekolah / Dapodik',
+                            'Toolman / Teknisi Bengkel',
+                            'Laboran Komputer / IPA',
+                            'Pustakawan',
+                            'Petugas Keamanan / Satpam',
+                        ],
+                        'Guru Mata Pelajaran' => [
+                            'Guru Pendidikan Agama Islam (PAI)',
+                            'Guru PPKn',
+                            'Guru Bahasa Indonesia',
+                            'Guru Matematika',
+                            'Guru Bahasa Inggris',
+                            'Guru Informatika',
+                            'Guru Produktif TKJ',
+                            'Guru Produktif RPL',
+                            'Guru PJOK (Olahraga)',
+                            'Guru Seni Budaya',
+                            'Guru Sejarah Indonesia',
+                            'Guru IPAS / IPA',
+                            'Guru Produk Kreatif & Kewirausahaan (PKK)',
+                        ],
+                    ];
+                    $flatList = array_merge(...array_values($jabatanList));
+                    $currentVal = old('mata_pelajaran', $guru->mata_pelajaran);
+                    $isPredefined = in_array($currentVal, $flatList);
+                @endphp
+
+                <div class="space-y-3 p-4 sm:p-5 rounded-2xl bg-biru-muda/30 border border-biru/15"
+                     x-data="{
+                         selectedOption: '{{ $isPredefined ? $currentVal : ($currentVal ? 'Lainnya' : '') }}',
+                         customJabatan: '{{ $isPredefined ? '' : $currentVal }}'
+                     }">
                     <div class="flex items-center justify-between">
-                        <label for="mata_pelajaran" class="block text-xs font-bold text-biru-tua uppercase tracking-wider">
-                            Mata Pelajaran / Tugas Mengajar
+                        <label for="select_jabatan" class="block text-xs font-bold text-biru-tua uppercase tracking-wider">
+                            Jabatan / Mata Pelajaran
                         </label>
-                        <span class="text-[11px] text-redup">Bisa pilih atau ketik bebas</span>
+                        <span class="text-[11px] text-redup">Pilih peran guru atau staf dari dropdown</span>
                     </div>
+
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-redup">
                             <svg class="w-4 h-4 text-biru" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
                         </div>
-                        <input id="mata_pelajaran" name="mata_pelajaran" type="text" list="daftar-mapel" value="{{ old('mata_pelajaran', $guru->mata_pelajaran) }}"
-                            placeholder="Contoh: PPKn, Matematika, Bahasa Indonesia..."
-                            class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-garis text-sm text-teks focus:border-biru focus:ring-2 focus:ring-biru/20 outline-none transition-all placeholder-redup/70 bg-white">
+                        <select id="select_jabatan" x-model="selectedOption"
+                            @change="if (selectedOption !== 'Lainnya') customJabatan = selectedOption"
+                            class="w-full pl-10 pr-10 py-2.5 rounded-xl border border-garis text-sm text-teks focus:border-biru focus:ring-2 focus:ring-biru/20 outline-none transition-all bg-white cursor-pointer font-medium">
+                            <option value="">-- Pilih Jabatan / Tugas Mengajar --</option>
+                            @foreach ($jabatanList as $kategori => $daftar)
+                                <optgroup label="📂 {{ $kategori }}">
+                                    @foreach ($daftar as $item)
+                                        <option value="{{ $item }}">{{ $item }}</option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
+                            <optgroup label="⚙️ Pilihan Lainnya">
+                                <option value="Lainnya">➕ Lainnya (Ketik Manual...)</option>
+                            </optgroup>
+                        </select>
                     </div>
-                    <datalist id="daftar-mapel">
-                        <option value="PPKn">
-                        <option value="Pendidikan Agama Islam">
-                        <option value="Bahasa Indonesia">
-                        <option value="Matematika">
-                        <option value="Bahasa Inggris">
-                        <option value="Ilmu Pengetahuan Alam (IPA)">
-                        <option value="Ilmu Pengetahuan Sosial (IPS)">
-                        <option value="Pendidikan Jasmani & Olahraga (PJOK)">
-                        <option value="Seni Budaya">
-                        <option value="Informatika">
-                        <option value="Teknik Komputer & Jaringan (TKJ)">
-                        <option value="Rekayasa Perangkat Lunak (RPL)">
-                        <option value="Produk Kreatif & Kewirausahaan (PKK)">
-                        <option value="Bimbingan Konseling (BK)">
-                        <option value="Sejarah Indonesia">
-                    </datalist>
-                    <div class="flex flex-wrap items-center gap-1.5 pt-1">
-                        <span class="text-[11px] text-redup mr-1 font-medium">Pilihan cepat:</span>
-                        @foreach (['PPKn', 'Matematika', 'B. Indonesia', 'B. Inggris', 'PAI', 'PJOK', 'Informatika', 'TKJ', 'BK'] as $pilihan)
-                            <button type="button" onclick="document.getElementById('mata_pelajaran').value='{{ $pilihan }}'"
-                                class="px-2.5 py-1 rounded-lg text-xs bg-white hover:bg-biru hover:text-white text-biru-tua border border-biru/20 transition-all font-medium shadow-2xs">
-                                + {{ $pilihan }}
-                            </button>
-                        @endforeach
+
+                    <!-- Input Khusus jika memilih 'Lainnya' -->
+                    <div x-show="selectedOption === 'Lainnya'" x-cloak class="space-y-1.5 pt-1">
+                        <label for="custom_jabatan" class="block text-xs font-semibold text-biru-tua">
+                            Ketik Nama Jabatan / Mapel Khusus:
+                        </label>
+                        <input type="text" id="custom_jabatan" x-model="customJabatan"
+                            placeholder="Contoh: Koordinator BKK, Instruktur Kejuruan, dll."
+                            class="w-full px-4 py-2.5 rounded-xl border border-garis text-sm text-teks focus:border-biru focus:ring-2 focus:ring-biru/20 outline-none transition-all bg-white placeholder-redup/70">
                     </div>
+
+                    <!-- Hidden input yang dikirim ke backend -->
+                    <input type="hidden" name="mata_pelajaran" :value="selectedOption === 'Lainnya' ? customJabatan : selectedOption">
                     <x-input-error :messages="$errors->get('mata_pelajaran')" class="mt-1" />
                 </div>
 
@@ -142,7 +188,7 @@
                         <svg class="w-4 h-4 text-emas" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                         </svg>
-                        <span>Akun Login Guru</span>
+                        <span>Akun Login Guru & Staf</span>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -181,7 +227,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                         </svg>
-                        <span>Simpan Perubahan</span>
+                        <span>Simpan Perubahan Guru & Staf</span>
                     </button>
                 </div>
             </form>

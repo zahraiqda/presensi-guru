@@ -19,10 +19,10 @@
                         <span>SMK ISLAM AL AMANAH SALEM</span>
                     </div>
                     <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
-                        Log Riwayat Presensi Guru
+                        Log Riwayat Presensi Guru & Staf
                     </h1>
                     <p class="text-xs sm:text-sm text-slate-200 max-w-xl">
-                        Pantau seluruh transaksi check-in dan checkout kehadiran guru beserta waktu dan titik koordinat GPS.
+                        Pantau seluruh transaksi check-in dan checkout kehadiran guru & staf beserta waktu dan titik koordinat GPS.
                     </p>
                 </div>
             </div>
@@ -36,15 +36,15 @@
                 </div>
                 <div>
                     <h3 class="leading-tight text-biru-tua">Pencarian & Filter Riwayat</h3>
-                    <p class="text-xs text-redup font-normal">Saring riwayat kehadiran berdasarkan guru, tanggal tertentu, atau status presensi.</p>
+                    <p class="text-xs text-redup font-normal">Saring riwayat kehadiran berdasarkan guru & staf, tanggal tertentu, atau status presensi.</p>
                 </div>
             </div>
 
             <form method="GET" class="flex flex-col sm:flex-row sm:items-end gap-4">
                 <div class="flex-1">
-                    <label class="block text-xs font-bold text-teks uppercase tracking-wider mb-1.5">Pilih Guru</label>
+                    <label class="block text-xs font-bold text-teks uppercase tracking-wider mb-1.5">Pilih Guru & Staf</label>
                     <select name="guru_id" class="w-full px-4 py-2.5 rounded-xl border border-garis text-sm text-teks focus:border-biru focus:ring-2 focus:ring-biru/20 outline-none bg-white">
-                        <option value="">Semua Guru</option>
+                        <option value="">Semua Guru & Staf</option>
                         @foreach ($daftarGuru as $g)
                             <option value="{{ $g->id }}" {{ (string) $guruId === (string) $g->id ? 'selected' : '' }}>
                                 {{ $g->nama }}
@@ -82,7 +82,7 @@
                     <thead class="bg-biru-muda border-b border-garis text-biru-tua text-xs font-bold uppercase tracking-wider">
                         <tr>
                             <th class="px-6 py-4">Tanggal</th>
-                            <th class="px-6 py-4">Guru</th>
+                            <th class="px-6 py-4">Guru & Staf</th>
                             <th class="px-6 py-4 text-center">Jam Masuk</th>
                             <th class="px-6 py-4 text-center">Jam Pulang</th>
                             <th class="px-6 py-4 text-center">Status</th>

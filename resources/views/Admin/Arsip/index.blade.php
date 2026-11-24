@@ -19,10 +19,10 @@
                         <span>SMK ISLAM AL AMANAH SALEM</span>
                     </div>
                     <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
-                        Arsip Presensi Guru
+                        Arsip Presensi Guru & Staf
                     </h1>
                     <p class="text-xs sm:text-sm text-slate-200 max-w-xl">
-                        Kumpulan seluruh riwayat presensi dewan guru yang telah diarsipkan berdasarkan Tahun Ajaran dan Semester. Data tersimpan aman dan dapat ditelusuri kapan saja.
+                        Kumpulan seluruh riwayat presensi dewan guru & staf yang telah diarsipkan berdasarkan Tahun Ajaran dan Semester. Data tersimpan aman dan dapat ditelusuri kapan saja.
                     </p>
                 </div>
 

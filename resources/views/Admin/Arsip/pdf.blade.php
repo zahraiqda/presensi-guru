@@ -318,12 +318,12 @@
         </table>
     </div>
 
-    <h3>REKAPITULASI KEHADIRAN PER DEWAN GURU</h3>
+    <h3>REKAPITULASI KEHADIRAN PER DEWAN GURU & STAF</h3>
     <table class="table-data">
         <thead>
             <tr>
                 <th style="width: 6%;" class="text-center">No</th>
-                <th style="width: 36%;">Nama Guru</th>
+                <th style="width: 36%;">Nama Guru & Staf</th>
                 <th style="width: 22%;">NIP / Bidang Studi</th>
                 <th style="width: 12%;" class="text-center">Hadir</th>
                 <th style="width: 12%;" class="text-center">Izin</th>

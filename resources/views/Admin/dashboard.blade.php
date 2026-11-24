@@ -58,7 +58,7 @@
                         Selamat Datang, {{ Auth::user()->nama }} 👋
                     </h1>
                     <p class="text-sm sm:text-base text-[#cdd5ea] max-w-2xl leading-relaxed">
-                        Pantau kedisiplinan dan rekap kehadiran dewan guru SMK Islam Al-Amanah Salem secara langsung hari ini.
+                        Pantau kedisiplinan dan rekap kehadiran dewan guru & staf SMK Islam Al-Amanah Salem secara langsung hari ini.
                     </p>
                 </div>
 
@@ -85,7 +85,7 @@
             <div class="bg-white rounded-xl p-5 border border-garis shadow-xs hover:shadow-md transition-all duration-200 border-t-4 border-t-biru flex flex-col justify-between">
                 <div>
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-redup uppercase tracking-wider">Total Dewan Guru</span>
+                        <span class="text-xs font-bold text-redup uppercase tracking-wider">Total Guru & Staf</span>
                         <div class="w-10 h-10 rounded-lg bg-biru-muda text-biru flex items-center justify-center">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
@@ -94,12 +94,12 @@
                     </div>
                     <div class="mt-3 flex items-baseline gap-2">
                         <span class="text-3xl sm:text-4xl font-extrabold text-biru-tua">{{ $totalGuru }}</span>
-                        <span class="text-xs font-medium text-redup">Guru / Staf</span>
+                        <span class="text-xs font-medium text-redup">Guru & Staf</span>
                     </div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-[#efe8d8] flex items-center justify-between text-xs text-biru font-bold">
                     <a href="{{ route('admin.guru.index') }}" class="hover:underline flex items-center gap-1">
-                        <span>Kelola Master Guru</span>
+                        <span>Kelola Guru & Staf</span>
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                     </a>
                 </div>
@@ -258,12 +258,12 @@
                                 📋
                             </div>
                             <div>
-                                <h3 class="text-base font-bold text-biru-tua">Ringkasan Kehadiran Guru Hari Ini</h3>
-                                <p class="text-xs text-redup">Daftar presensi seluruh dewan guru secara real-time</p>
+                                <h3 class="text-base font-bold text-biru-tua">Ringkasan Kehadiran Guru & Staf Hari Ini</h3>
+                                <p class="text-xs text-redup">Daftar presensi seluruh dewan guru & staf secara real-time</p>
                             </div>
                         </div>
                         <div class="text-xs text-redup font-medium bg-krem border border-garis px-3 py-1 rounded-md">
-                            Menampilkan <span class="font-bold text-biru" x-text="filteredTeachers.length"></span> dari <span class="font-bold text-teks">{{ count($ringkasanGuru) }}</span> guru
+                            Menampilkan <span class="font-bold text-biru" x-text="filteredTeachers.length"></span> dari <span class="font-bold text-teks">{{ count($ringkasanGuru) }}</span> guru & staf
                         </div>
                     </div>
 
@@ -278,7 +278,7 @@
                             </div>
                             <input type="text"
                                    x-model="search"
-                                   placeholder="Cari berdasarkan nama, NIK, atau guru mapel..."
+                                   placeholder="Cari berdasarkan nama, NIK, atau jabatan/mapel..."
                                    class="w-full pl-9 pr-4 py-2.5 rounded-lg border border-garis text-xs sm:text-sm focus:border-biru focus:ring-2 focus:ring-biru/20 outline-none transition-all placeholder:text-redup bg-[#fdfcf9]">
                         </div>
 
@@ -333,7 +333,7 @@
                     <table class="min-w-full text-left text-sm divide-y divide-garis">
                         <thead class="bg-biru-muda text-biru-tua font-bold text-xs tracking-wider uppercase">
                             <tr>
-                                <th class="px-5 py-3.5">Nama Guru</th>
+                                <th class="px-5 py-3.5">Nama Guru & Staf</th>
                                 <th class="px-5 py-3.5">NIK</th>
                                 <th class="px-5 py-3.5">Jam Masuk</th>
                                 <th class="px-5 py-3.5">Jam Pulang</th>
@@ -351,7 +351,7 @@
                                             </div>
                                             <div>
                                                 <span class="block font-semibold text-teks text-sm leading-tight" x-text="g.nama"></span>
-                                                <span class="block text-[11px] text-redup mt-0.5" x-text="g.label_mapel || (g.mata_pelajaran ? 'Guru ' + g.mata_pelajaran : 'Tenaga Pengajar')"></span>
+                                                <span class="block text-[11px] text-redup mt-0.5" x-text="g.label_mapel || (g.mata_pelajaran ? 'Guru ' + g.mata_pelajaran : 'Guru / Staf')"></span>
                                             </div>
                                         </div>
                                     </td>
@@ -476,7 +476,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                                             </svg>
                                         </div>
-                                        <p class="font-semibold text-teks">Tidak ada data guru yang cocok</p>
+                                        <p class="font-semibold text-teks">Tidak ada data guru & staf yang cocok</p>
                                         <p class="text-xs text-redup">Coba kata kunci lain atau ubah filter status.</p>
                                     </div>
                                 </td>

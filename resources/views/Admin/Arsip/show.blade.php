@@ -112,12 +112,12 @@
                         👥
                     </div>
                     <div>
-                        <h4 class="font-bold text-sm text-teks">Ringkasan Kehadiran per Guru</h4>
-                        <p class="text-xs text-redup">Total {{ $rekapGuru->count() }} dewan guru tercatat pada arsip tahun ini</p>
+                        <h4 class="font-bold text-sm text-teks">Ringkasan Kehadiran Guru & Staf</h4>
+                        <p class="text-xs text-redup">Total {{ $rekapGuru->count() }} dewan guru & staf tercatat pada arsip tahun ini</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-2 text-xs font-semibold text-biru">
-                    <span x-text="openRekap ? 'Tutup Ringkasan' : 'Lihat Ringkasan Guru'"></span>
+                    <span x-text="openRekap ? 'Tutup Ringkasan' : 'Lihat Ringkasan Guru & Staf'"></span>
                     <svg class="w-4 h-4 transform transition-transform" :class="openRekap ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                     </svg>
@@ -148,7 +148,7 @@
             <form method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <!-- Search Guru -->
                 <div>
-                    <label class="block text-[11px] font-bold text-redup uppercase tracking-wider mb-1">Cari Guru / NIP</label>
+                    <label class="block text-[11px] font-bold text-redup uppercase tracking-wider mb-1">Cari Guru & Staf / NIP</label>
                     <input type="text" name="q" value="{{ $q }}" placeholder="Nama, NIP, atau Mapel..."
                         class="w-full text-xs px-3 py-2 rounded-xl border border-garis focus:border-biru focus:ring-1 focus:ring-biru">
                 </div>
@@ -214,7 +214,7 @@
                         <thead class="bg-krem text-teks uppercase text-[10px] tracking-wider font-extrabold border-b border-garis">
                             <tr>
                                 <th class="py-3 px-4">No</th>
-                                <th class="py-3 px-4">Guru</th>
+                                <th class="py-3 px-4">Guru & Staf</th>
                                 <th class="py-3 px-4">Hari & Tanggal</th>
                                 <th class="py-3 px-4">Waktu</th>
                                 <th class="py-3 px-4">Status</th>

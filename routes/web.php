@@ -44,6 +44,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/data-guru', [GuruController::class, 'index'])->name('guru.index');
+    Route::get('/data-guru/template-csv', [GuruController::class, 'downloadTemplate'])->name('guru.template');
     Route::get('/data-guru/create', [GuruController::class, 'create'])->name('guru.create');
     Route::post('/data-guru', [GuruController::class, 'store'])->name('guru.store');
     Route::get('/data-guru/{guru}/edit', [GuruController::class, 'edit'])->name('guru.edit');

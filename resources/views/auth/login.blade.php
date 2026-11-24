@@ -51,7 +51,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Masuk - Presensi Guru SMK Islam Al-Amanah</title>
+<title>Masuk - Presensi Guru & Staf SMK Islam Al-Amanah</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
@@ -331,7 +331,7 @@
     </div>
     <div class="nama">
       <h1>SMK Islam Al-Amanah</h1>
-      <p>Salem, Kabupaten Brebes &middot; Sistem Presensi Guru</p>
+      <p>Salem, Kabupaten Brebes &middot; Sistem Presensi Guru & Staf</p>
     </div>
     <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
   </div>
@@ -340,7 +340,7 @@
 <main>
   <!-- ========== Informasi ========== -->
   <section class="kiri">
-    <h2>Presensi Guru dan Staf</h2>
+    <h2>Presensi Guru & Staf</h2>
     <p class="sub">Catat kehadiran setiap hari kerja langsung dari lingkungan sekolah.</p>
 
     <div class="waktu">
@@ -380,7 +380,7 @@
     </div>
 
     <div class="pengumuman">
-      <b>Pengumuman:</b> Guru yang berhalangan hadir mohon mengajukan izin melalui menu <b>Izin / Sakit</b> sebelum pukul {{ $masukToleransi }}.
+      <b>Pengumuman:</b> Guru & staf yang berhalangan hadir mohon mengajukan izin melalui menu <b>Izin / Sakit</b> sebelum pukul {{ $masukToleransi }}.
     </div>
   </section>
 
@@ -406,7 +406,7 @@
 
     <div class="peran" role="radiogroup" aria-label="Peran akun">
       <input type="radio" name="role" id="p-guru" value="guru" {{ old('role', 'guru') === 'guru' ? 'checked' : '' }}>
-      <label for="p-guru">Guru</label>
+      <label for="p-guru">Guru & Staf</label>
       <input type="radio" name="role" id="p-kepsek" value="kepala_sekolah" {{ old('role') === 'kepala_sekolah' ? 'checked' : '' }}>
       <label for="p-kepsek">Kepala Sekolah</label>
       <input type="radio" name="role" id="p-admin" value="admin" {{ old('role') === 'admin' ? 'checked' : '' }}>

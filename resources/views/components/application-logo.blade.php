@@ -8,6 +8,6 @@
     </div>
     <div class="flex flex-col text-left">
         <span class="text-base font-extrabold tracking-tight text-white leading-none">AL-AMANAH</span>
-        <span class="text-[10px] font-semibold tracking-wider text-amber-300 uppercase mt-0.5">Presensi Guru &middot; Salem</span>
+        <span class="text-[10px] font-semibold tracking-wider text-amber-300 uppercase mt-0.5">Presensi Guru & Staf &middot; Salem</span>
     </div>
 </div>

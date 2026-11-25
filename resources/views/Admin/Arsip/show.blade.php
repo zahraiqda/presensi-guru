@@ -130,7 +130,7 @@
                         <div class="bg-white p-3.5 rounded-xl border border-garis/80 text-xs space-y-1.5 shadow-2xs">
                             <p class="font-bold text-teks truncate">{{ $rg->nama_guru }}</p>
                             <p class="text-[11px] text-redup">
-                                {{ $rg->mata_pelajaran ? 'Guru ' . $rg->mata_pelajaran : ($rg->nip_guru ? 'NIP: ' . $rg->nip_guru : 'Dewan Guru') }}
+                                {{ $rg->mata_pelajaran ?: ($rg->nip_guru ? 'NIP: ' . $rg->nip_guru : 'Guru / Staf') }}
                             </p>
                             <div class="flex items-center gap-3 pt-1 text-[11px]">
                                 <span class="text-emerald-700 font-bold">Hadir: {{ $rg->hadir }}</span>
@@ -230,7 +230,7 @@
                                     <td class="py-3 px-4">
                                         <div class="font-bold text-teks">{{ $item->nama_guru }}</div>
                                         <div class="text-[11px] text-redup">
-                                            {{ $item->mata_pelajaran ? 'Guru ' . $item->mata_pelajaran : ($item->nip_guru ? 'NIP: ' . $item->nip_guru : '-') }}
+                                            {{ $item->mata_pelajaran ?: ($item->nip_guru ? 'NIP: ' . $item->nip_guru : '-') }}
                                         </div>
                                     </td>
                                     <td class="py-3 px-4 whitespace-nowrap">

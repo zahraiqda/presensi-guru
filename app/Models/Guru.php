@@ -18,15 +18,11 @@ class Guru extends Model
         $val = trim((string) $this->mata_pelajaran);
 
         if (empty($val)) {
-            return 'Tenaga Pendidik / Staf';
+            return 'Guru / Staf';
         }
 
-        // Jika sudah berupa nama jabatan struktural, staf, atau berawalan Guru
-        if (preg_match('/^(guru|waka|staf|staff|kepala|kaprog|bendahara|operator|laboran|toolman|teknisi|pustakawan|penjaga|satpam|koordinator|pembina)\b/i', $val)) {
-            return $val;
-        }
-
-        return 'Guru ' . $val;
+        // Tampilkan persis apa adanya sesuai inputan/pilihan admin tanpa ditambah kata "Guru" otomatis
+        return $val;
     }
 
     public function user()

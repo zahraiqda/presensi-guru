@@ -336,7 +336,7 @@
                     <td class="text-center">{{ $loop->iteration }}</td>
                     <td><strong>{{ $rg->nama_guru }}</strong></td>
                     <td>
-                        {{ $rg->mata_pelajaran ? 'Guru ' . $rg->mata_pelajaran : ($rg->nip_guru ? 'NIP: ' . $rg->nip_guru : '-') }}
+                        {{ $rg->mata_pelajaran ?: ($rg->nip_guru ? 'NIP: ' . $rg->nip_guru : '-') }}
                     </td>
                     <td class="text-center">{{ $rg->hadir }} kali</td>
                     <td class="text-center">{{ $rg->izin }} kali</td>

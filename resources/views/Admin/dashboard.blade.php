@@ -351,7 +351,7 @@
                                             </div>
                                             <div>
                                                 <span class="block font-semibold text-teks text-sm leading-tight" x-text="g.nama"></span>
-                                                <span class="block text-[11px] text-redup mt-0.5" x-text="g.label_mapel || (g.mata_pelajaran ? 'Guru ' + g.mata_pelajaran : 'Guru / Staf')"></span>
+                                                <span class="block text-[11px] text-redup mt-0.5" x-text="g.label_mapel || g.mata_pelajaran || 'Guru / Staf'"></span>
                                             </div>
                                         </div>
                                     </td>

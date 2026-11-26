@@ -48,7 +48,7 @@
                     </p>
                     <div class="pt-1 flex items-center gap-2">
                         <span class="inline-flex items-center px-3 py-1 rounded-lg bg-amber-200/80 border border-amber-300 font-mono font-bold text-sm text-amber-950">
-                            <span x-text="cooldown"></span> detik
+                            <span x-text="cooldown"></span>&nbsp;detik
                         </span>
                         <span class="text-[11px] text-amber-700 italic">Harap periksa email Anda segera</span>
                     </div>

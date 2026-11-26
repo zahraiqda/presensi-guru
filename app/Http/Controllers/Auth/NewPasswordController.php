@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,8 +18,19 @@ class NewPasswordController extends Controller
     /**
      * Display the password reset view.
      */
-    public function create(Request $request): View
+    public function create(Request $request): View|RedirectResponse
     {
+        $email = $request->query('email');
+        $token = $request->route('token');
+
+        $user = $email ? User::where('email', $email)->first() : null;
+
+        // Cek apakah token masih ada dan belum kedaluwarsa (masa berlaku 60 detik)
+        if (! $user || ! $token || ! Password::broker()->tokenExists($user, $token)) {
+            return redirect()->route('password.request')
+                ->withErrors(['username' => 'Link reset password sudah kedaluwarsa (masa berlaku 60 detik telah habis) atau tidak valid. Silakan ajukan link reset password yang baru.']);
+        }
+
         return view('auth.reset-password', ['request' => $request]);
     }
 
@@ -56,6 +68,6 @@ class NewPasswordController extends Controller
         return $status == Password::PASSWORD_RESET
                     ? redirect()->route('login')->with('status', __($status))
                     : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+                            ->withErrors(['email' => $status === Password::INVALID_TOKEN ? 'Link reset password sudah kedaluwarsa (masa berlaku 60 detik telah habis) atau tidak valid. Silakan minta link baru.' : __($status)]);
     }
 }

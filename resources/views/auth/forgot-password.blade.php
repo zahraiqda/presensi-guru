@@ -1,5 +1,24 @@
 <x-guest-layout>
-    <div class="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-krem text-teks relative overflow-hidden">
+    <div class="min-h-screen flex items-center justify-center p-4 sm:p-6 bg-krem text-teks relative overflow-hidden"
+         x-data="{
+             cooldown: {{ $cooldownRemaining ?? 0 }},
+             timer: null,
+             init() {
+                 if (this.cooldown > 0) {
+                     this.startTimer();
+                 }
+             },
+             startTimer() {
+                 if (this.timer) clearInterval(this.timer);
+                 this.timer = setInterval(() => {
+                     if (this.cooldown > 0) {
+                         this.cooldown--;
+                     } else {
+                         clearInterval(this.timer);
+                     }
+                 }, 1000);
+             }
+         }">
         <!-- Ambient Decorative Elements -->
         <div class="absolute -top-40 -left-40 w-96 h-96 bg-biru/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-emas/15 rounded-full blur-3xl pointer-events-none"></div>
@@ -14,6 +33,26 @@
                 <p class="text-xs text-redup leading-relaxed">
                     Masukkan username akun Anda. Reset password mandiri via email hanya berlaku untuk akun <span class="text-biru font-semibold">Admin</span>. Untuk Guru / Kepsek, silakan hubungi Administrator sekolah.
                 </p>
+            </div>
+
+            <!-- Cooldown Banner (Aktif jika dalam masa tunggu 60 detik) -->
+            <div x-show="cooldown > 0" x-cloak
+                 class="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start gap-3 animate-in fade-in duration-200">
+                <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs mt-0.5">
+                    ⏳
+                </div>
+                <div class="flex-1 space-y-1">
+                    <p class="font-bold text-amber-900 text-sm">Waktu Cooldown Sedang Berjalan</p>
+                    <p class="text-amber-800 leading-relaxed text-xs">
+                        Link reset password hanya berlaku selama <strong>60 detik</strong>. Tombol kirim link dapat ditekan kembali dalam:
+                    </p>
+                    <div class="pt-1 flex items-center gap-2">
+                        <span class="inline-flex items-center px-3 py-1 rounded-lg bg-amber-200/80 border border-amber-300 font-mono font-bold text-sm text-amber-950">
+                            <span x-text="cooldown"></span> detik
+                        </span>
+                        <span class="text-[11px] text-amber-700 italic">Harap periksa email Anda segera</span>
+                    </div>
+                </div>
             </div>
 
             @if (session('status'))
@@ -33,19 +72,20 @@
                         </svg>
                         <div class="text-xs leading-relaxed">
                             <p class="font-bold text-amber-800">Koneksi Server Email (SMTP) Terkendala</p>
-                            <p class="text-amber-700 mt-0.5">Jaringan/provider internet Anda memblokir port SMTP Gmail. Namun link reset password akun <strong>{{ session('status_fallback')['email'] }}</strong> berhasil dibuat secara aman:</p>
+                            <p class="text-amber-700 mt-0.5">Jaringan/provider internet Anda memblokir port SMTP Gmail. Namun link reset password akun <strong>{{ session('status_fallback')['email'] }}</strong> berhasil dibuat secara aman (berlaku <strong>60 detik</strong>):</p>
                         </div>
                     </div>
                     <div class="pt-1">
                         <a href="{{ session('status_fallback')['url'] }}"
                            class="block w-full py-2.5 px-4 text-center rounded-xl bg-biru hover:bg-biru-tua text-emas-terang font-bold text-xs shadow-xs transition-all">
-                            Buka Form Reset Password Sekarang &rarr;
+                            Buka Form Reset Password Sekarang (60 Detik) &rarr;
                         </a>
                     </div>
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('password.email') }}" class="space-y-4">
+            <form method="POST" action="{{ route('password.email') }}" class="space-y-4"
+                  @submit="if (cooldown === 0) { cooldown = 60; startTimer(); }">
                 @csrf
 
                 <div>
@@ -72,8 +112,23 @@
 
                 <div class="space-y-3 pt-2">
                     <button type="submit"
-                            class="w-full py-3.5 px-4 rounded-xl text-white font-bold text-sm bg-biru hover:bg-biru-tua shadow-lg shadow-biru/20 border border-emas/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center gap-2">
-                        <span>Kirim Link Reset Password</span>
+                            :disabled="cooldown > 0"
+                            :class="cooldown > 0
+                                ? 'bg-slate-200 text-slate-500 border-slate-300 cursor-not-allowed shadow-none'
+                                : 'bg-biru hover:bg-biru-tua text-white border-emas/40 shadow-lg shadow-biru/20 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer'"
+                            class="w-full py-3.5 px-4 rounded-xl font-bold text-sm border transition-all duration-200 flex items-center justify-center gap-2">
+                        <template x-if="cooldown > 0">
+                            <span class="inline-flex items-center gap-2">
+                                <svg class="w-4 h-4 animate-spin text-slate-500" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                                </svg>
+                                <span>Tunggu <span class="font-mono font-bold" x-text="cooldown"></span> detik untuk kirim ulang</span>
+                            </span>
+                        </template>
+                        <template x-if="cooldown === 0">
+                            <span>Kirim Link Reset Password</span>
+                        </template>
                     </button>
 
                     <div class="text-center">

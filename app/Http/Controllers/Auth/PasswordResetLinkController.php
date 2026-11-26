@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 
@@ -13,7 +15,26 @@ class PasswordResetLinkController extends Controller
 {
     public function create(): View
     {
-        return view('auth.forgot-password');
+        $cooldownRemaining = 0;
+        $adminUser = User::where('role', 'admin')->first();
+        if ($adminUser) {
+            $resetEmail = $adminUser->email ?: env('ADMIN_RESET_EMAIL');
+            if ($resetEmail) {
+                $record = DB::table('password_reset_tokens')->where('email', $resetEmail)->first();
+                if ($record && $record->created_at) {
+                    $secondsAgo = now()->diffInSeconds(Carbon::parse($record->created_at));
+                    if ($secondsAgo < 60) {
+                        $cooldownRemaining = 60 - $secondsAgo;
+                    }
+                }
+            }
+        }
+
+        if (session('cooldown_triggered')) {
+            $cooldownRemaining = max($cooldownRemaining, session('cooldown_triggered'));
+        }
+
+        return view('auth.forgot-password', compact('cooldownRemaining'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -46,11 +67,13 @@ class PasswordResetLinkController extends Controller
             $status = Password::sendResetLink(['email' => $resetEmail]);
 
             if ($status === Password::RESET_LINK_SENT) {
-                return back()->with('status', 'Link reset password telah dikirim ke email: ' . $resetEmail);
+                return back()
+                    ->with('status', 'Link reset password telah dikirim ke email: ' . $resetEmail . '. Link ini hanya aktif selama 60 detik.')
+                    ->with('cooldown_triggered', 60);
             }
 
             $pesan = match ($status) {
-                Password::RESET_THROTTLED => 'Terlalu banyak permintaan reset password dalam waktu singkat. Harap tunggu sekitar 1 menit sebelum mencoba kembali.',
+                Password::RESET_THROTTLED => 'Terlalu banyak permintaan reset password dalam waktu singkat. Harap tunggu waktu jeda (cooldown 60 detik) selesai sebelum mencoba kembali.',
                 Password::INVALID_USER => 'Pengguna dengan email tersebut tidak ditemukan.',
                 default => __($status),
             };
@@ -64,11 +87,13 @@ class PasswordResetLinkController extends Controller
             $token = Password::broker()->createToken($user);
             $resetUrl = route('password.reset', ['token' => $token, 'email' => $resetEmail]);
 
-            return back()->with('status_fallback', [
-                'email' => $resetEmail,
-                'url' => $resetUrl,
-                'error' => $e->getMessage(),
-            ]);
+            return back()
+                ->with('status_fallback', [
+                    'email' => $resetEmail,
+                    'url' => $resetUrl,
+                    'error' => $e->getMessage(),
+                ])
+                ->with('cooldown_triggered', 60);
         }
     }
 }

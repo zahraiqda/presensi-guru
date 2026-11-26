@@ -16,6 +16,11 @@
                 </p>
             </div>
 
+            <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center gap-2">
+                <span class="text-base">⏱️</span>
+                <span>Link reset password ini berlaku selama <strong>60 detik</strong>. Harap segera masukkan dan simpan password baru Anda.</span>
+            </div>
+
             <form method="POST" action="{{ route('password.store') }}" class="space-y-4">
                 @csrf
 
